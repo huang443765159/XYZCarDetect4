@@ -21,7 +21,7 @@ class Gui:
         self._detect = self._devices.detect
         # SIGNALS
         self._sign = self._detect.sign  # 因为我们的信号不是Qt信号，所以会出现这种问题
-        self._sign.is_car.connect(self._signal_is_car)
+        self._sign.car_stopped.connect(self._signal_is_car)
         self._sign.distance.connect(self._signal_distance)
         # UI
         QTools.table_init(table=self._ui.table_distance, no_edit=False)

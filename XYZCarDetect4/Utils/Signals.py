@@ -8,4 +8,4 @@ from XYZUtil4.tools.for_class import singleton
 class Signals:
 
     distance = Signal(list)  # dis_list
-    is_car = Signal(bool, np.array, int)  # is_car, frame, timestamp
+    car_stopped = Signal(bool, np.array, int)  # is_car, frame, timestamp

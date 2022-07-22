@@ -13,6 +13,7 @@ class CarDetectNUC:
         self._inviter = MixINVITER()
         self._inviter.set_machine_sn(machine_sn=CODEC.TCP.MACHINE_SN)
         self._inviter.add_network(network=self._network)
+        self._was_stopped = False
         # SIGNAL
         self.sign = Signals()
 
@@ -31,4 +32,12 @@ class CarDetectNUC:
     def _recv(self, data: bytes, ip: str, pkt_id: int):
         head, rx_msg = decode(data=data)
         if head == CODEC.HEAD_TO_NUC:
-            self.sign.is_car.emit(rx_msg['is_car'], rx_msg['frame'], rx_msg['timestamp'])
+            self.sign.car_stopped.emit(rx_msg['was_stopped'], rx_msg['frame'], rx_msg['timestamp'])
+            self._was_stopped = rx_msg['was_stopped']
+
+    def get_was_stopped(self) -> bool:
+        return self._was_stopped
+
+    def exit(self):
+        self._network.exit()
+        self._inviter.exit()
