@@ -21,18 +21,19 @@ class Gui:
         self._detect = self._devices.detect
         # SIGNALS
         self._sign = self._detect.sign  # 因为我们的信号不是Qt信号，所以会出现这种问题
-        self._sign.car_stopped.connect(self._signal_is_car)
+        self._sign.car_stopped.connect(self._signal_car_stopped)
         self._sign.distance.connect(self._signal_distance)
         # UI
         QTools.table_init(table=self._ui.table_distance, no_edit=False)
         self._ui.table_distance.cellChanged.connect(self._user_input)
         self._ui.btn_debug.stateChanged.connect(self._debug)
 
-    def _signal_is_car(self, is_car: bool, frame: np.array):
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        new_frame = cv2.resize(frame, (int(frame.shape[1] * 0.2), int(frame.shape[0] * 0.2)))
-        image = QImage(new_frame.data, new_frame.shape[1], new_frame.shape[0], QImage.Format_RGB888)
-        self._ui.car_display.setPixmap(QPixmap.fromImage(image))
+    def _signal_car_stopped(self, was_stopped: bool, timestamp):
+        pass
+        # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        # new_frame = cv2.resize(frame, (int(frame.shape[1] * 0.2), int(frame.shape[0] * 0.2)))
+        # image = QImage(new_frame.data, new_frame.shape[1], new_frame.shape[0], QImage.Format_RGB888)
+        # self._ui.car_display.setPixmap(QPixmap.fromImage(image))
 
     def _signal_distance(self, dist_list: list):
         self._ui.table_distance.blockSignals(True)

@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="XYZCarDetect4",
-    version="2022.07.21.12.01",
+    version="2022.08.12.14.18",
     author="HuangKai",
     url="https://github.com/WillEEEEEE/XYZCarPlates4.git",
     packages=setuptools.find_packages(),

@@ -32,8 +32,8 @@ class _Mcu:
 
 
 class _State:
-    DIS1 = 500
-    DIS2 = 700
+    DIS1 = 800
+    DIS2 = 900
     DIS3 = 1000
 
 
